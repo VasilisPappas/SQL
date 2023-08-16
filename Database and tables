@@ -1,5 +1,5 @@
-CREATE DATABASE record_company;
-USE record_company;
+CREATE DATABASE record_database;
+USE record_database;
 
 
 CREATE TABLE companies (
