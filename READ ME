@@ -2,5 +2,5 @@ In this repository, our objective is to explore and utilize various options and 
 These data refer to record companies, artists, albums, and songs. To achieve this, we have established a database named 'record_company',
 which encompasses the relevant tables (refer to the file named 'Database and Tables').
 
-Next step is to insert data into the tables. This can be done through the code provided in the file 'Inserting data'. 
+Next step is to insert data into the tables. This can be done through the code provided in the file **'Inserting data'**. 
 
