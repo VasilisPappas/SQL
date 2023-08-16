@@ -1,6 +1,6 @@
 In this repository, our objective is to explore and utilize various options and capabilities of MySQL using synthetic data. 
 These data refer to record companies, artists, albums, and songs. To achieve this, we have established a database named 'record_company',
-which encompasses the relevant tables (refer to the file named 'Database and Tables').[click](https://github.com/VasilisPappas/SQL/blob/main/Inserting%20data)
+which encompasses the relevant tables (refer to the file named 'Database and Tables').
 
 Next step is to insert data into the tables. This can be done through the code provided in the file 'Inserting data'. 
 
