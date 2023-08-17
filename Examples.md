@@ -55,3 +55,34 @@ join albums alb on art.id=alb.artist_id;</pre>
 
 > Also, 'join' is the same with 'inner join'.
 
+## 6) Viewing the 5th newest album:
+<pre>select name, release_year
+from albums 
+order by release_year desc
+limit 4,1;</pre>
+> It is pointless to state that we do want non null values, cause desceding order starts with non null values.
+## 7) Viewing the 8th and 9th newest albums:
+<pre>select name, release_year
+from albums 
+order by release_year desc
+limit 7,2;</pre>
+## 8) How can I see if there are any artists with no released albums?
+<pre> SELECT art.name, albums.name
+FROM artists art
+left JOIN albums ON art.id = albums.artist_id;</pre>
+> A "LEFT JOIN" displays all the records from the left table, along with matching records from the right table. In this context, we are looking at all the artists, and on the right side, we're showing the names of albums, including those with null values. As an alternative approach, we could include the condition "WHERE albums.name IS NULL" to specifically see only those artists who haven't released any albums.
+
+ OR,
+ <pre>SELECT art.name, albums.name
+FROM albums
+right JOIN artists art ON art.id = albums.artist_id;</pre>
+
+> 'Left outer join' and 'right outer join' are the same with Left and right joins.
+
+## 9) Display artists whose names start with the letter 'M':
+<pre>
+ select name
+ from artists
+ where name like "M%";
+</pre>
+
