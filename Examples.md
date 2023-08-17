@@ -86,3 +86,34 @@ right JOIN artists art ON art.id = albums.artist_id;</pre>
  where name like "M%";
 </pre>
 
+## 10) Display the number of songs for each artist, from highest to lowest:
+<pre>select  artists.name as Artist,  COUNT(songs.id) as 'Number of Songs'
+from artists
+join albums on artists.id = albums.artist_id
+join songs on albums.id = songs.album_id
+group by albums.artist_id
+order by count(songs.id) desc;</pre>
+
+> Here, we need to perform a join operation across 3 tables as we require information from 'songs' and 'artists' tables. These two tables need to be connected through a third table, which is the 'albums' table.
+
+*TIP: The correct form of joining 3 tables is as below:*
+<pre>SELECT table1.col, table3.col
+FROM table1
+JOIN table2 ON table1.primarykey = table2.foreignkey
+JOIN table3 ON table2.primarykey = table3.foreignkey;</pre>
+
+And NOT by any means, this: 
+<pre>SELECT table1.col, table3.col
+FROM table1
+JOIN table2 ON table1.primarykey = table2.foreignkey
+JOIN table3 ON table2.foreignkey = table3.foreignkey;</pre>
+
+## 11) Show for each company which albums are released in alphabetical order:
+
+<pre>select albums.name as Album, companies.name as 'Record Company'
+from companies
+join artists on companies.id=artists.company_id
+join albums on artists.id=albums.artist_id
+order by albums.name;</pre>
+
+> The structure of the 4 tables is as following: companies -> artists -> albums -> songs. According to the specific query we need to connect 'companies' and 'albums' and this can be done via 'artists'. So, double joining is required!
