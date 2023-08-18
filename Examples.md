@@ -166,3 +166,17 @@ OR,
 from songs
 order by length desc
 limit 1;</pre>
+
+## 15) Remove the existing database and some tables:
+
+<pre>drop database record_database</pre>
+
+<pre>drop table artists</pre>
+
+<pre>drop table songs</pre>
+
+> Please exercise caution before proceeding with the next queries, as you must FIRST recreate the database and the deleted tables. Additionally, keep in mind that you need to utilize 'USE DATABASE record_database'...
+
+## 16) It's time to delete some data refering to the artist Sia:
+<pre>delete from artists
+where id=28</pre>
