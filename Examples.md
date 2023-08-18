@@ -45,15 +45,23 @@ having release_year is not null;</pre>
 
 > Also, instead of 'count(*)' we can use 'count(id)', where id is the primary key of the corresponding table.
 
-## 5) Which artists have released albums? Get also the corresponding albums:
+## 5) Which artists (alphabetically) have released albums? Get also the corresponding albums:
 
 <pre>select art.name Artist, alb.name Album
 from artists art
-join albums alb on art.id=alb.artist_id;</pre>
+join albums alb on art.id=alb.artist_id
+order by Artist;</pre>
 
 > Aliases for tables simplify column referencing, improving readability. In the instance provided, using aliases distinguishes 'name' columns from different tables. I find aliases beneficial even when unnecessary, as they quickly clarify column origins.
 
 > Also, 'join' is the same with 'inner join'.
+
+OR, using a  subquery:
+<pre>select name
+from artists
+where id in ( select artist_id
+             from albums)
+order by name;</pre>
 
 ## 6) Viewing the 5th newest album:
 <pre>select name, release_year
@@ -133,4 +141,28 @@ join albums on artists.id=albums.artist_id
 join songs on albums.id=songs.album_id
 group by albums.id
 order by sum(songs.length) desc
+limit 1;</pre>
+
+Instead, If I wanted to print the maximum duration I could use a subquery:
+<pre>select MAX(album_length) as max_album_length
+from (
+    select SUM(s.length) as album_length
+    from albums a
+    join songs s on a.id = s.album_id
+    group by a.id
+) as album_length;</pre>
+> I have to admit that I prefer double joins or single joins over subqueries. Additionally, joining tends to be faster (most times) and more efficient when dealing with large datasets.
+> However, it's important to understand how to utilize subqueries effectively for optimization purposes and for gaining a better understanding of the underlying procedures in SQL.
+
+## 14) Find the song with the longest duration:
+<pre>
+select  *
+from songs
+where length = (select max(length)
+                from songs);</pre>
+
+OR,
+<pre>select *
+from songs
+order by length desc
 limit 1;</pre>
