@@ -117,3 +117,20 @@ join albums on artists.id=albums.artist_id
 order by albums.name;</pre>
 
 > The structure of the 4 tables is as following: companies -> artists -> albums -> songs. According to the specific query we need to connect 'companies' and 'albums' and this can be done via 'artists'. So, double joining is required!
+
+## 12) Which is the duration of each album?
+<pre>select albums.name as Album, sum(songs.length) as Duration
+from albums
+join songs on albums.id=songs.album_id
+group by albums.id;</pre>
+> (Obviously) 'group by songs.album_id' gives the same result... The magic power of '=' :)
+
+
+## 13) Extract the characteristics of the album with the longest duration:
+<pre>select albums.name as Album, artists.name Artist, albums.release_year year, sum(songs.length) as 'Duration of Album'
+from artists
+join albums on artists.id=albums.artist_id
+join songs on albums.id=songs.album_id
+group by albums.id
+order by sum(songs.length) desc
+limit 1;</pre>
