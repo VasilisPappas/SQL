@@ -8,7 +8,7 @@ From now on, we have our database that we can manipulate. Below are some example
  `select *
  from companies;`
 
-` select *
+`select *
  from artists;`
 > Keep in mind that in both the 'albums' and 'songs' tables, exist null values in the 'release_year', 'country', and 'price' fields, respectively.
 
@@ -60,7 +60,7 @@ OR, using a  subquery:
 <pre>select name
 from artists
 where id in ( select artist_id
-             from albums)
+              from albums)
 order by name;</pre>
 
 ## 6) Viewing the 5th newest album:
@@ -75,23 +75,25 @@ from albums
 order by release_year desc
 limit 7,2;</pre>
 ## 8) How can I see if there are any artists with no released albums?
-<pre> SELECT art.name, albums.name
-FROM artists art
+<pre>
+select art.name, albums.name
+from artists art
 left JOIN albums ON art.id = albums.artist_id;</pre>
 > A "LEFT JOIN" displays all the records from the left table, along with matching records from the right table. In this context, we are looking at all the artists, and on the right side, we're showing the names of albums, including those with null values. As an alternative approach, we could include the condition "WHERE albums.name IS NULL" to specifically see only those artists who haven't released any albums.
 
  OR,
- <pre>SELECT art.name, albums.name
-FROM albums
+<pre> 
+select art.name, albums.name
+from albums
 right JOIN artists art ON art.id = albums.artist_id;</pre>
 
 > 'Left outer join' and 'right outer join' are the same with Left and right joins.
 
 ## 9) Display artists whose names start with the letter 'M':
 <pre>
- select name
- from artists
- where name like "M%";
+select name
+from artists
+where name like "M%";
 </pre>
 
 ## 10) Display the number of songs for each artist, from highest to lowest:
@@ -146,10 +148,10 @@ limit 1;</pre>
 Instead, If I wanted to print the maximum duration I could use a subquery:
 <pre>select MAX(album_length) as max_album_length
 from (
-    select SUM(s.length) as album_length
-    from albums a
-    join songs s on a.id = s.album_id
-    group by a.id
+      select SUM(s.length) as album_length
+      from albums a
+      join songs s on a.id = s.album_id
+      group by a.id
 ) as album_length;</pre>
 > I have to admit that I prefer double joins or single joins over subqueries. Additionally, joining tends to be faster (most times) and more efficient when dealing with large datasets.
 > However, it's important to understand how to utilize subqueries effectively for optimization purposes and for gaining a better understanding of the underlying procedures in SQL.
@@ -171,12 +173,51 @@ limit 1;</pre>
 
 <pre>drop database record_database</pre>
 
+<pre>drop table songs</pre>
+
+<pre>drop table albums</pre>
+
 <pre>drop table artists</pre>
 
-<pre>drop table songs</pre>
+<pre>drop table companies</pre>
 
 > Please exercise caution before proceeding with the next queries, as you must FIRST recreate the database and the deleted tables. Additionally, keep in mind that you need to utilize 'USE DATABASE record_database'...
 
-## 16) It's time to delete some data refering to the artist Sia:
-<pre>delete from artists
-where id=28</pre>
+> EXTREMELY IMPORTANT: Structure of tables: companies -> artists -> albums -> songs. In this arrangement, 'companies' is a parent table for 'artists', while 'songs' is a child table for 'albums'. By default the deletion of a parent table is restricted, as associated data in the child tables must be purged beforehand, a safeguard upheld by SQL.
+> There is an available option of using 'ON DELETE CASCADE' to automatically delete the data from child when deleting the parent table, but we won't deal with that.
+
+## 16) It's time to delete some data refering to 'songs' table:
+<pre>delete from songs
+where id=182;</pre>
+> The above statement deletes a row. Make sure to reinsert it to the table 'songs' to proceed to the next queries.
+
+## 17) We need to insert a new info about the budget of each company (float number). Here, this can be done by:
+
+<pre>alter table companies
+add column budget float;</pre>
+
+You can also modify any of the columns in a table:
+
+<pre>alter table companies
+modify column budget int;</pre>
+
+But, I changed my mind... So I'm gonna remove this column:
+
+<pre>alter table companies
+drop column budget;</pre>
+
+> In the 'alter table' statement, 'column' is optional.
+
+## 18) If I want to change some of the info of a row:
+ <pre>
+ update songs
+ set price=10.00
+ where id=182;</pre>
+
+ And once again I want to undo what I did so:
+ <pre>
+ update songs
+ set price=2.00
+ where id=182;</pre>
+
+
