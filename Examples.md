@@ -220,4 +220,6 @@ drop column budget;</pre>
  set price=2.00
  where id=182;</pre>
 
-
+## 19) Union:
+## 20) full join:
+## 21) partition over:
