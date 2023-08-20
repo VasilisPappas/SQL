@@ -6,10 +6,11 @@ From now on, we have our database that we can manipulate. Below are some example
 
 ## 1) I want the content of all tables:
  `select *
- from companies;`
+  from companies;`
 
 `select *
  from artists;`
+
 > Keep in mind that in both the 'albums' and 'songs' tables, exist null values in the 'release_year', 'country', and 'price' fields, respectively.
 
  `select * 
@@ -234,7 +235,7 @@ from companies;</pre>
 > 'Union' combines rows from different tables while 'join' combines columns. 'Union' is handful when we cannot join tables.
 > The number of columns in the 'select' statements must be the same, as well as their types.
 ## 20) Using a FULL JOIN with MySQL:
- Full join is useful when we want to see the hole view of combined tables. I mean the 'non matches (null values)' from the left and right sides at the same time. But in MySQL this is done via 'union':
+A 'full join' is valuable when we aim to obtain a comprehensive view of combined tables, including the 'non-matches' (null values) from both the left and right sides simultaneously. However, in MySQL, achieving this is accomplished using the 'union' operator:
 
 <pre>select artists.name Artist,albums.name Album
 from artists
