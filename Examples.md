@@ -232,8 +232,11 @@ union
 select name, year_founded
 from companies;</pre>
 
-> 'Union' combines rows from different tables while 'join' combines columns. 'Union' is handful when we cannot join tables.
+> 'Union' is handful when we cannot join tables while it combines rows from different tables.
+
 > The number of columns in the 'select' statements must be the same, as well as their types.
+
+> Also,'union all' returns duplicates.
 ## 20) Using a FULL JOIN with MySQL:
 A 'full join' is valuable when we aim to obtain a comprehensive view of combined tables, including the 'non-matches' (null values) from both the left and right sides simultaneously. However, in MySQL, achieving this is accomplished using the 'union' operator:
 
