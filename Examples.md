@@ -149,9 +149,9 @@ order by sum(songs.length) desc
 limit 1;</pre>
 
 Instead, If I wanted to print the maximum duration I could use a subquery:
-<pre>select MAX(album_length) as max_album_length
+<pre>select max(album_length) as max_album_length
 from (
-      select SUM(s.length) as album_length
+      select sum(s.length) as album_length
       from albums a
       join songs s on a.id = s.album_id
       group by a.id
@@ -223,12 +223,27 @@ drop column budget;</pre>
  set price=2.00
  where id=182;</pre>
  
-## 19) union
+## 19) Let's say we want to display the names of the companies and all album names in the same column, while in another column, we aim to show the respective years (founded or released).
 
+<pre>select name as 'name of album or company', release_year as 'year of release or foundation'
+from albums
+union
+select name, year_founded
+from companies;</pre>
 
-
+> 'Union' combines rows from different tables while 'join' combines columns. 'Union' is handful when we cannot join tables.
+> The number of columns in the 'select' statements must be the same, as well as their types.
 ## 20) Using a FULL JOIN with MySQL:
+ Full join is useful when we want to see the hole view of combined tables. I mean the 'non matches (null values)' from the left and right sides at the same time. But in MySQL this is done via 'union':
 
-
+<pre>select artists.name Artist,albums.name Album
+from artists
+left join albums on artists.id=albums.artist_id
+union
+select artists.name Artist,albums.name Album
+from artists
+right join albums on artists.id=albums.artist_id;</pre>
+ 
+> This displays all artists and all albums that exist, even if there is an album without an associated artist or an artist without a released album. As a result, we obtain null values in both the left and right columns. BUT, In this case there are no albums without corresponding artists (logical I guess), so it resembles a 'left join'(with respect to Artist) since we only observe null values in the right column of the outcome.
 
 ## 21) partition over:
