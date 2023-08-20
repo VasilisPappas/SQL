@@ -32,7 +32,7 @@ limit 1;</pre>
 from albums
 where release_year is not null
 order by release_year;</pre>
-> 'name of the album' is an alias making more specific the name we want to view. Alternatively we can ignore 'as'.
+> 'name of the album' is an alias. Alternatively we can ignore 'as'.
 
 ## 4) Calculate the number of the albums per year (obviously not null instances selected). Also rename the result as 'number of albums':
 
@@ -41,20 +41,24 @@ from albums
 group by release_year
 having release_year is not null;</pre>
 
-> 'where' statement cannot be applied after 'group by'. Instead, usage of 'having' is provided.
+> The use of a 'where' statement is not permissible after a 'group by' clause. Instead, the 'having' clause is utilized for this purpose.
 
-> Also, instead of 'count(*)' we can use 'count(id)', where id is the primary key of the corresponding table.
+> Additionally, rather than applying 'count(*)', we can use 'count(id)', where 'id' signifies the primary key of the respective table.
 
-## 5) Which artists (alphabetically) have released albums? Get also the corresponding albums:
-
-<pre>select art.name Artist, alb.name Album
+## 5) Which artists (alphabetically) have released albums? Get also the corresponding albums, along with year of release:
+> Here is the case of using 2 tables via 'join'.
+<pre>select art.name Artist, alb.name Album, alb.release_year
 from artists art
 join albums alb on art.id=alb.artist_id
 order by Artist;</pre>
 
-> Aliases for tables simplify column referencing, improving readability. In the instance provided, using aliases distinguishes 'name' columns from different tables. I find aliases beneficial even when unnecessary, as they quickly clarify column origins.
+> Joins are used to combine columns from two tables based on matching values in a field shared by both tables.
+> Something interesting is that the above query shows 'null' for the 'release_year' for some rows. But, I am comfortable with the existence of null values in the 'release_year' column, as I have allowed their presence due to the structure of the table.
+> Therefore, a join between both tables entails fetching corresponding details from columns that were specifically designed to not allow null values.
 
-> Also, 'join' is the same with 'inner join'.
+> Aliases for tables simplify column referencing, improving readability. In the instance provided, using aliases distinguishes 'name' columns from different tables. I find aliases beneficial even when unnecessary (like 'release_year'), as they quickly clarify column origins.
+
+>  Also, 'join' is the same with 'inner join'.
 
 OR, using a  subquery:
 <pre>select name
@@ -62,7 +66,7 @@ from artists
 where id in ( select artist_id
               from albums)
 order by name;</pre>
-
+> If I were to include 'select name, albums.name' in my outer query, it would not function as intended, because we are restricted to viewing columns only from the outer table 'artists'.
 ## 6) Viewing the 5th newest album:
 <pre>select name, release_year
 from albums 
@@ -76,18 +80,17 @@ order by release_year desc
 limit 7,2;</pre>
 ## 8) How can I see if there are any artists with no released albums?
 <pre>
-select art.name, albums.name
+select art.name Artist, albums.name Album
 from artists art
-left JOIN albums ON art.id = albums.artist_id;</pre>
-> A "LEFT JOIN" displays all the records from the left table, along with matching records from the right table. In this context, we are looking at all the artists, and on the right side, we're showing the names of albums, including those with null values. As an alternative approach, we could include the condition "WHERE albums.name IS NULL" to specifically see only those artists who haven't released any albums.
+left join albums on art.id = albums.artist_id;</pre>
+> A 'left join' displays all records from the left table along with corresponding records from the right table. In this scenario, we are considering all the artists and showcasing album names from the right side, even those with no matching album names (which are represented as null values). Alternatively, we can utilize the condition 'where albums.name is null' to exclusively observe artists who haven't released any albums (despite the 'name' column being designated as non-null).
 
- OR,
-<pre> 
-select art.name, albums.name
+OR,
+<pre>select art.name, albums.name
 from albums
-right JOIN artists art ON art.id = albums.artist_id;</pre>
+right join artists art on art.id = albums.artist_id;</pre>
 
-> 'Left outer join' and 'right outer join' are the same with Left and right joins.
+> 'Left outer join' and 'right outer join' are the same with left and right joins.
 
 ## 9) Display artists whose names start with the letter 'M':
 <pre>
@@ -219,7 +222,13 @@ drop column budget;</pre>
  update songs
  set price=2.00
  where id=182;</pre>
+ 
+## 19) union
 
-## 19) Union:
-## 20) full join:
+
+
+## 20) Using a FULL JOIN with MySQL:
+
+
+
 ## 21) partition over:
