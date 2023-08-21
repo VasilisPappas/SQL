@@ -140,7 +140,7 @@ group by albums.id;</pre>
 > (Obviously) 'group by songs.album_id' gives the same result... The magic power of '=' :)
 
 
-## 13) Extract the characteristics of the album with the longest duration:
+## 13) Extract the characteristics of the album with the longest duration along with the name of the artist:
 <pre>select albums.name as Album, artists.name Artist, albums.release_year year, sum(songs.length) as 'Duration of Album'
 from artists
 join albums on artists.id=albums.artist_id
@@ -232,9 +232,9 @@ union
 select name, year_founded
 from companies;</pre>
 
-> 'Union' is handful when we cannot join tables while it combines rows from different tables.
+> 'Union' is handful when we cannot join tables (here we can though), while it combines rows from different tables.
 
-> The number of columns in the 'select' statements must be the same, as well as their types.
+> The number of columns in the 'select' statements must be the same, as well as their data types.
 
 > Also,'union all' returns duplicates.
 ## 20) Using a FULL JOIN with MySQL:
