@@ -5,6 +5,6 @@ which encompasses the relevant tables (refer to the file named <a href -"https:/
 <p>Finally, you can find some code exercises in the  <a href -"https://github.com/VasilisPappas/SQL/blob/main/Examples.md"> Examples</a> file.</p>
 
 <p></p>
-<p>* Reference:</p> 
-<p>The idea of contructing this kind of database as well as some data, were provided through the GitHub profile <a href -"https://www.youtube.com/"> WebDevSimplified/Learn-SQL</a>.
+<p>* Reference:
+The idea of contructing this kind of database as well as some data, were provided through the GitHub profile [WebDevSimplified/Learn-SQL](https://github.com/WebDevSimplified/Learn-SQL)https://github.com/WebDevSimplified/Learn-SQL.
 </p>
