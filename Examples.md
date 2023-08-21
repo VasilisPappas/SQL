@@ -250,4 +250,4 @@ right join albums on artists.id=albums.artist_id;</pre>
  
 > This displays all artists and all albums that exist, even if there is an album without an associated artist or an artist without a released album. As a result, we obtain null values in both the left and right columns. BUT, In this case there are no albums without corresponding artists (logical I guess), so it resembles a 'left join'(with respect to Artist) since we only observe null values in the right column of the outcome.
 
-## 21) partition over:
+
