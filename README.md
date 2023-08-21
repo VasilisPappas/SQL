@@ -6,5 +6,5 @@ which encompasses the relevant tables (refer to the file named <a href -"https:/
 
 <p></p>
 <p>* Reference:
-The idea of contructing this kind of database as well as some data, were provided through the GitHub profile [WebDevSimplified/Learn-SQL](https://github.com/WebDevSimplified/Learn-SQL)https://github.com/WebDevSimplified/Learn-SQL.
+The idea of contructing this kind of database as well as some data, were provided through the GitHub profile [WebDevSimplified/Learn-SQL]
 </p>
