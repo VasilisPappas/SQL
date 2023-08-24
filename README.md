@@ -8,5 +8,5 @@ Finally, you can find some code exercises in the [Examples](https://github.com/V
 
 
 * Reference:
-The idea of contructing this kind of database as well as some data, were provided through the GitHub profile [WebDevSimplified/Learn-SQL](https://github.com/WebDevSimplified/Learn-SQL).
+The idea of contructing this kind of database as well as some of the data inserted, were provided through the GitHub profile [WebDevSimplified/Learn-SQL](https://github.com/WebDevSimplified/Learn-SQL).
 
